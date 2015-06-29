@@ -1,2 +1,2 @@
 # kl
-Simple keylogger for Linux running X11
+Simple keylogger for Linux + X11
