@@ -102,17 +102,14 @@ modifiers = ('<left shift>', '<left ctrl>', '<left alt>', '<right shift>',
              '<right ctrl>', '<right alt>',)
 
 last_keys = dict(modifiers=[], regular=[])
+last_keyboard_list = None
 
 
-def x11_get_raw_keyboard():
+def get_keyboard_list():
     x11.XQueryKeymap(display, raw_keyboard)
-    return raw_keyboard
 
-
-def transform_keyboard(keyboard):
     try:
-        keyboard = [ord(byte) for byte in keyboard]
-        keyboard = enumerate(keyboard)
+        keyboard = [ord(byte) for byte in raw_keyboard]
     except TypeError:
         return None
 
@@ -144,19 +141,23 @@ def get_keys(keyboard):
 def run(sleep_time=.02, cb=print):
     while True:
         global last_keys
+        global last_keyboard_list
 
         sleep(sleep_time)
-        raw_keyboard = x11_get_raw_keyboard()
-        keyboard = transform_keyboard(raw_keyboard)
 
-        if not keyboard:
+        keyboard_list = get_keyboard_list()
+
+        if keyboard_list == last_keyboard_list or not keyboard_list:
             continue
 
-        keys = get_keys(keyboard)
+        keyboard_enumerate = enumerate(keyboard_list)
 
-        if (keys['regular'] and keys['regular'] != last_keys['regular']):
+        keys = get_keys(keyboard_enumerate)
+
+        if keys['regular'] and keys['regular'] != last_keys['regular']:
             cb(keys)
 
+        last_keyboard_list = keyboard_list
         last_keys = keys
 
 
