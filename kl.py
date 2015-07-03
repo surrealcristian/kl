@@ -140,8 +140,8 @@ def get_keys(keyboard):
 
 def run(sleep_time=.02, cb=print):
     while True:
-        global last_keys
         global last_keyboard_list
+        global last_keys
 
         sleep(sleep_time)
 
