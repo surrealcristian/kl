@@ -141,7 +141,7 @@ def get_keys(keyboard):
     return keys
 
 
-def run(sleep_time=.005, cb=print):
+def run(sleep_time=.02, cb=print):
     while True:
         global last_keys
 
