@@ -139,7 +139,7 @@ def get_keys(keyboard):
     return keys
 
 
-def run(sleep_time=.005, cb=None):
+def run(sleep_time=.005, cb=print):
     while True:
         global last_keys
 
@@ -153,10 +153,7 @@ def run(sleep_time=.005, cb=None):
         keys = get_keys(keyboard)
 
         if (keys['regular'] and keys['regular'] != last_keys['regular']):
-            if cb is None:
-                print(keys)
-            else:
-                cb(keys)
+            cb(keys)
 
         last_keys = keys
 
