@@ -11,7 +11,7 @@ Work in progress.
 
 ## Usage
 
-### Without custom callback (prints to STDOUT)
+Without custom callback (prints to STDOUT):
 
 ```python
 import kl
@@ -19,7 +19,7 @@ import kl
 kl.run()
 ```
 
-### With custom callback, logging to disk
+With custom callback, logging to disk:
 
 ```python
 import json
@@ -31,5 +31,3 @@ def log(keys):
 
 kl.run(cb=log)
 ```
-
-Enjoy.
