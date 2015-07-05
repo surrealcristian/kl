@@ -61,7 +61,7 @@ def get_keys(keymap):
     return keys
 
 
-def run(sleep_time=.02, cb=print):
+def run(sleep_time=.02, transform=None, output=print):
     """Main loop.
        Apply callback to the keys extracted"""
     while True:
@@ -78,7 +78,10 @@ def run(sleep_time=.02, cb=print):
         keys = get_keys(keymap)
 
         if keys['regular'] and keys['regular'] != last_keys['regular']:
-            cb(keys)
+            if transform is not None:
+                keys = transform(keys)
+
+            output(keys)
 
         last_keymap = keymap
         last_keys = keys
