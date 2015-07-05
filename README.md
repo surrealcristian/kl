@@ -4,8 +4,8 @@ Simple keylogger for Linux + X11.
 
 ## Requirements
 
-- Python 3
-- Xlib
+- python 2 or 3
+- xlib
 
 ## Usage
 
