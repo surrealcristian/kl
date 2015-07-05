@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from __future__ import print_function
+
 import ctypes
 import sys
 from ctypes.util import find_library
@@ -123,6 +125,7 @@ keymap_values_list = {
         2: 'keypad 3',
         4: 'keypad 0',
         8: 'keypad .',
+        64: '<',
         128: 'f11',
     },
     12: {
