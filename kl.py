@@ -19,7 +19,7 @@ raw_keyboard = (ctypes.c_char * 32)()
 
 key_mappings_container = {
     1: {
-        2: '<esc>',
+        2: 'esc',
         4: '1',
         8: '2',
         16: '3',
@@ -34,8 +34,8 @@ key_mappings_container = {
         8: '0',
         16: '-',
         32: '=',
-        64: '<backspace>',
-        128: '<tab>',
+        64: 'backspace',
+        128: 'tab',
     },
     3: {
         1: 'q',
@@ -52,8 +52,8 @@ key_mappings_container = {
         2: 'p',
         4: '[',
         8: ']',
-        16: '<enter>',
-        32: '<left ctrl>',
+        16: 'enter',
+        32: 'left ctrl',
         64: 'a',
         128: 's',
     },
@@ -70,7 +70,7 @@ key_mappings_container = {
     6: {
         1: '\'',
         2: '`',
-        4: '<left shift>',
+        4: 'left shift',
         8: '\\',
         16: 'z',
         32: 'x',
@@ -84,22 +84,82 @@ key_mappings_container = {
         8: ',',
         16: '.',
         32: '/',
-        64: '<right shift>',
-        128: '<unidentified>',
+        64: 'right shift',
+        128: 'keypad *',
     },
     8: {
-        1: '<left alt>',
-        2: '<space bar>',
-        4: '<caps lock>',
+        1: 'left alt',
+        2: 'space bar',
+        4: 'capslock',
+        8: 'f1',
+        16: 'f2',
+        32: 'f3',
+        64: 'f4',
+        128: 'f5',
+    },
+    9: {
+        1: 'f6',
+        2: 'f7',
+        4: 'f8',
+        8: 'f9',
+        16: 'f10',
+        32: 'keypad bloqnum',
+        128: 'keypad 7',
+    },
+    10: {
+        1: 'keypad 8',
+        2: 'keypad 9',
+        4: 'keypad -',
+        8: 'keypad 4',
+        16: 'keypad 5',
+        64: 'keypad +',
+        32: 'keypad 6',
+        128: 'keypad 1',
+    },
+    11: {
+        1: 'keypad 2',
+        2: 'keypad 3',
+        4: 'keypad 0',
+        8: 'keypad .',
+        128: 'f11',
+    },
+    12: {
+        1: 'f12',
     },
     13: {
-        2: '<right ctrl>',
-        16: '<right alt>',
+        1: 'keypad intro',
+        2: 'right ctrl',
+        4: 'keypad /',
+        8: 'printscreen',
+        16: 'right alt',
+        64: 'home',
+        128: 'up',
+    },
+    14: {
+        1: 'repag',
+        2: 'left',
+        4: 'right',
+        8: 'end',
+        16: 'down',
+        32: 'avpag',
+        64: 'insert',
+        128: 'delete',
+
+    },
+    16: {
+        32: 'super left',
+        128: 'super right',
     },
 }
 
-modifiers = ('<left shift>', '<left ctrl>', '<left alt>', '<right shift>',
-             '<right ctrl>', '<right alt>',)
+modifiers = (
+    'left shift',
+    'left ctrl',
+    'left alt',
+    'right shift',
+    'right ctrl',
+    'right alt',
+)
 
 last_keys = dict(modifiers=[], regular=[])
 last_keyboard_list = None
