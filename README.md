@@ -41,5 +41,5 @@ def log(keys):
         f.write(json.dumps(keys) + '\n')
 
 
-kl.run(sleep_time=.001, transform=add_time, output=log)
+kl.run(sleep_time=.01, transform=add_time, output=log)
 ```
