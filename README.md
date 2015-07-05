@@ -29,7 +29,7 @@ import kl
 
 def log(keys):
     with open('/tmp/kl.log', 'a') as f:
-        print(json.dumps(keys), file=f)
+        f.write(json.dumps(keys) + '\n')
 
 kl.run(cb=log)
 ```
