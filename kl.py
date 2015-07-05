@@ -7,7 +7,11 @@ import sys
 from ctypes.util import find_library
 from time import sleep
 
-assert("linux" in sys.platform)
+if not 'linux' in sys.platform:
+    raise RuntimeError('Platform not supported (Linux only).')
+
+if not find_library('X11'):
+    raise RuntimeError('X11 library is required.')
 
 x11 = ctypes.cdll.LoadLibrary(find_library("X11"))
 
