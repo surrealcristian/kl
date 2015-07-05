@@ -15,9 +15,9 @@ display = x11.XOpenDisplay(None)
 
 # This contains the keyboard state.
 # 32 bytes, with each bit representing the state for a single key.
-raw_keyboard = (ctypes.c_char * 32)()
+raw_keymap = (ctypes.c_char * 32)()
 
-key_mappings_container = {
+keymap_values_list = {
     1: {
         2: 'esc',
         4: '1',
@@ -162,33 +162,33 @@ modifiers = (
 )
 
 last_keys = dict(modifiers=[], regular=[])
-last_keyboard_list = None
+last_keymap = None
 
 
-def get_keyboard_list():
-    x11.XQueryKeymap(display, raw_keyboard)
+def get_keymap():
+    x11.XQueryKeymap(display, raw_keymap)
 
     try:
-        keyboard = [ord(byte) for byte in raw_keyboard]
+        keyboard = [ord(byte) for byte in raw_keymap]
     except TypeError:
         return None
 
     return keyboard
 
 
-def get_keys(keyboard):
+def get_keys(keymap):
     keys = dict(modifiers=[], regular=[])
 
-    # loop on keyboard bytes
-    for kb_byte_index, kb_byte in keyboard:
+    # loop on keymap bytes
+    for keymap_index, keymap_byte in enumerate(keymap):
         try:
-            key_mappings = key_mappings_container[kb_byte_index]
+            keymap_values = keymap_values_list[keymap_index]
         except KeyError:
             continue
 
-        # loop on key_mappings for that keyboard byte
-        for key, value in key_mappings.items():
-            if not kb_byte & key:
+        # loop on keymap_values for that keymap byte
+        for key, value in keymap_values.items():
+            if not keymap_byte & key:
                 continue
             elif value in modifiers:
                 keys['modifiers'].append(value)
@@ -200,24 +200,22 @@ def get_keys(keyboard):
 
 def run(sleep_time=.02, cb=print):
     while True:
-        global last_keyboard_list
+        global last_keymap
         global last_keys
 
         sleep(sleep_time)
 
-        keyboard_list = get_keyboard_list()
+        keymap = get_keymap()
 
-        if keyboard_list == last_keyboard_list or not keyboard_list:
+        if keymap == last_keymap or not keymap:
             continue
 
-        keyboard_enumerate = enumerate(keyboard_list)
-
-        keys = get_keys(keyboard_enumerate)
+        keys = get_keys(keymap)
 
         if keys['regular'] and keys['regular'] != last_keys['regular']:
             cb(keys)
 
-        last_keyboard_list = keyboard_list
+        last_keymap = keymap
         last_keys = keys
 
 
