@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import ctypes
-import json
-import os
 import sys
 from ctypes.util import find_library
 from time import sleep
