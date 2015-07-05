@@ -168,6 +168,7 @@ last_keymap = None
 
 
 def get_keymap():
+    """Returns X11 Keymap as a list of integers"""
     x11.XQueryKeymap(display, raw_keymap)
 
     try:
@@ -179,6 +180,7 @@ def get_keymap():
 
 
 def get_keys(keymap):
+    """Extract keys pressed from transformed keymap"""
     keys = dict(modifiers=[], regular=[])
 
     # loop on keymap bytes
@@ -201,6 +203,8 @@ def get_keys(keymap):
 
 
 def run(sleep_time=.02, cb=print):
+    """Main loop.
+       Apply callback to the keys extracted"""
     while True:
         global last_keymap
         global last_keys
