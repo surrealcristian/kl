@@ -7,6 +7,10 @@ Simple keylogger for Linux + X11.
 - python 2 or 3
 - xlib
 
+## Installation
+
+    pip install kl
+
 ## Usage
 
 Without custom callback (prints to STDOUT):
