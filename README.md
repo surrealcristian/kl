@@ -2,8 +2,6 @@
 
 Simple keylogger for Linux + X11.
 
-Work in progress.
-
 ## Requirements
 
 - Python 3
