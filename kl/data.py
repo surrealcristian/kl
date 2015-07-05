@@ -129,16 +129,18 @@ keymap_values_list = {
 
     },
     16: {
-        32: 'super left',
-        128: 'super right',
+        32: 'left super',
+        128: 'right super',
     },
 }
 
 modifiers = (
     'left shift',
-    'left ctrl',
-    'left alt',
     'right shift',
+    'left ctrl',
     'right ctrl',
+    'left alt',
     'right alt',
+    'left super',
+    'right super',
 )
