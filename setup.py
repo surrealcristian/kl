@@ -9,7 +9,7 @@ except:
     from distutils.core import setup
 
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
+    os.system('python setup.py sdist bdist_wheel upload')
     sys.exit()
 
 packages = ['kl']
@@ -17,11 +17,12 @@ requires = []
 
 setup(
     name='kl',
-    version='1.0.2',
+    version='1.0.3',
     description='Simple keylogger for Linux + X11',
     author='Cristian Cabrera',
     author_email='surrealcristian@gmail.com',
     url='https://github.com/surrealists/kl',
+    keywords='keylogger linux x11',
     packages=packages,
     package_dir={'kl': 'kl'},
     include_package_data=True,
