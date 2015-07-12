@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 keymap_values_list = {
     1: {
         2: 'esc',
@@ -70,7 +72,7 @@ keymap_values_list = {
     },
     8: {
         1: 'left alt',
-        2: 'space bar',
+        2: 'spacebar',
         4: 'capslock',
         8: 'f1',
         16: 'f2',
@@ -145,8 +147,8 @@ modifiers = (
     'right super',
 )
 
-spanish_keys = {
-    'without_modifier': {
+spanish_layout = {
+    'wo_mods': {
         'a': 'a',
         'b': 'b',
         'c': 'c',
@@ -194,10 +196,21 @@ spanish_keys = {
         'keypad 7': '7',
         'keypad 8': '8',
         'keypad 9': '9',
+        'keypad .': '.',
+        'keypad /': '/',
+        'keypad *': '*',
+        'keypad -': '-',
+        'keypad +': '+',
+        'keypad intro': '<intro>',
+        'spacebar': '<spacebar>',
+        'esc': 'esc',
+        'backspace': '<backspace>',
+        'delete': '<delete>',
         '`': 'º',
         '-': '\'',
         '=': '¡',
         '<': '<',
+        'enter': '<enter>',
         '[': '`',
         ']': '+',
         '\'': '´',
