@@ -1,7 +1,7 @@
 from .data import spanish_layout
 
 
-def only_shifts(modifiers):
+def _only_shifts(modifiers):
     """Check if modifiers pressed are only shifts"""
     if not modifiers or len(modifiers) > 2:
         return False
@@ -11,7 +11,7 @@ def only_shifts(modifiers):
         return 'left shift' in modifiers or 'right shift' in modifiers
 
 
-def only_right_alt(modifiers):
+def _only_right_alt(modifiers):
     """Check if the only modifier pressed is right alt"""
     if not modifiers or len(modifiers) > 1:
         return False
@@ -31,9 +31,9 @@ def spanish(keys):
     try:
         if not modifiers:
             res = spanish_layout['wo_mods'][key]
-        elif only_shifts(modifiers):
+        elif _only_shifts(modifiers):
             res = spanish_layout['shift'][key]
-        elif only_right_alt(modifiers):
+        elif _only_right_alt(modifiers):
             res = spanish_layout['right_alt'][key]
         else:
             res = None

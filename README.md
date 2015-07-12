@@ -43,3 +43,19 @@ def log(keys):
 
 kl.run(sleep_time=.01, transform=add_time, output=log)
 ```
+
+## Transformers
+
+`kl` comes with functions that apply certain language layouts to pressed keys.
+
+```python
+import kl
+from kl.transformers import spanish
+
+kl.run(transform=spanish)
+```
+
+Actually the language layouts implemented are:
+
+- English (USA) (`english_usa`) (in progress)
+- Spanish (`spanish`)
