@@ -17,7 +17,7 @@ requires = []
 
 setup(
     name='kl',
-    version='2.1.0',
+    version='3.0.0',
     description='Simple keylogger for Linux + X11',
     author='Cristian Cabrera',
     author_email='surrealcristian@gmail.com',
