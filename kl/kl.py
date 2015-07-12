@@ -3,7 +3,7 @@ from __future__ import print_function
 
 import ctypes
 import sys
-from .data import keymap_values_list, modifiers
+from .data import keymap_values_dict, modifiers
 from ctypes.util import find_library
 from time import sleep
 
@@ -46,7 +46,7 @@ def get_keys(keymap):
     # loop on keymap bytes
     for keymap_index, keymap_byte in enumerate(keymap):
         try:
-            keymap_values = keymap_values_list[keymap_index]
+            keymap_values = keymap_values_dict[keymap_index]
         except KeyError:
             continue
 

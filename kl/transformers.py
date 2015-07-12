@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from .data import spanish_layout
+from .data import command_keys_repr, layout_agnostic_keys, spanish_layout
 
 
 def _only_shifts(modifiers):
@@ -32,7 +32,12 @@ def spanish(keys):
 
     try:
         if not modifiers:
-            res = spanish_layout['wo_mods'][key]
+            if key in layout_agnostic_keys.keys():
+                res = layout_agnostic_keys[key]
+            elif key in command_keys_repr.keys():
+                res = command_keys_repr[key]
+            else:
+                res = spanish_layout['wo_mods'][key]
         elif _only_shifts(modifiers):
             res = spanish_layout['shift'][key]
         elif _only_right_alt(modifiers):

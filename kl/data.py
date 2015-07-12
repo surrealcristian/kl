@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 
-keymap_values_list = {
+keymap_values_dict = {
     1: {
         2: 'esc',
         4: '1',
@@ -149,8 +149,7 @@ modifiers = (
     'right super',
 )
 
-spanish_layout = {
-    'wo_mods': {
+layout_agnostic_keys = {
         'a': 'a',
         'b': 'b',
         'c': 'c',
@@ -165,7 +164,6 @@ spanish_layout = {
         'l': 'l',
         'm': 'm',
         'n': 'n',
-        ';': 'ñ',
         'o': 'o',
         'p': 'p',
         'q': 'q',
@@ -188,31 +186,71 @@ spanish_layout = {
         '7': '7',
         '8': '8',
         '9': '9',
-        'keypad 0': '0',
-        'keypad 1': '1',
-        'keypad 2': '2',
-        'keypad 3': '3',
-        'keypad 4': '4',
-        'keypad 5': '5',
-        'keypad 6': '6',
-        'keypad 7': '7',
-        'keypad 8': '8',
-        'keypad 9': '9',
-        'keypad .': '.',
-        'keypad /': '/',
-        'keypad *': '*',
-        'keypad -': '-',
-        'keypad +': '+',
-        'keypad intro': '<intro>',
-        'spacebar': '<spacebar>',
-        'esc': 'esc',
-        'backspace': '<backspace>',
-        'delete': '<delete>',
+}
+
+command_keys_repr = {
+    'esc': '<esc>',
+    'f1': '<f1>',
+    'f2': '<f2>',
+    'f3': '<f3>',
+    'f4': '<f4>',
+    'f5': '<f5>',
+    'f6': '<f6>',
+    'f7': '<f7>',
+    'f8': '<f8>',
+    'f9': '<f9>',
+    'f10': '<f10>',
+    'f11': '<f11>',
+    'f12': '<f12>',
+    'alt': '<alt>',
+    'backspace': '<backspace>',
+    'tab': '<tab>',
+    'enter': '<enter>',
+    'spacebar': '<spacebar>',
+    'capslock': '<capslock>',
+    'keypad bloqnum': '<keypad bloqnum>',
+    'keypad intro': '<keypad intro>',
+    'printscreen': '<printscreen>',
+    'home': '<home>',
+    'up': '<up>',
+    'repag': '<repag>',
+    'left': '<left>',
+    'right': '<right>',
+    'end': '<end>',
+    'down': '<down>',
+    'avpag': '<avpag>',
+    'insert': '<insert>',
+    'delete': '<delete>',
+    'keypad 0': '<keypad 0>',
+    'keypad 1': '<keypad 1>',
+    'keypad 2': '<keypad 2>',
+    'keypad 3': '<keypad 3>',
+    'keypad 4': '<keypad 4>',
+    'keypad 5': '<keypad 5>',
+    'keypad 6': '<keypad 6>',
+    'keypad 7': '<keypad 7>',
+    'keypad 8': '<keypad 8>',
+    'keypad 9': '<keypad 9>',
+    'keypad .': '<keypad .>',
+    'keypad /': '<keypad />',
+    'keypad *': '<keypad *>',
+    'keypad -': '<keypad ->',
+    'keypad +': '<keypad +>',
+}
+
+english_layout = {
+    'wo_mods': {},
+    'shift': {},
+    'right_alt': {},
+}
+
+spanish_layout = {
+    'wo_mods': {
+        ';': 'ñ',
         '`': 'º',
         '-': '\'',
         '=': '¡',
         '<': '<',
-        'enter': '<enter>',
         '[': '`',
         ']': '+',
         '\'': '´',
@@ -272,6 +310,7 @@ spanish_layout = {
         '/': '_',
     },
     'right_alt': {
+        'q': '@',
         '0': '}',
         '1': '|',
         '2': '@',
