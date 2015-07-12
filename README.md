@@ -44,16 +44,16 @@ def log(keys):
 kl.run(sleep_time=.01, transform=add_time, output=log)
 ```
 
-## Transformers
+## Layouts
 
-`kl` comes with functions that apply a certain language layout to pressed
-keys.
+`kl` comes with functions that apply a certain language layout to the pressed
+keys. That functions can be used as the transform callback.
 
 For example:
 
 ```python
 import kl
-from kl.transformers import spanish
+from kl.layouts import spanish
 
 kl.run(transform=spanish)
 ```
