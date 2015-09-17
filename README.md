@@ -62,6 +62,7 @@ Actually the language layouts implemented are:
 
 - `english_usa` (in progress)
 - `spanish`
+- `pt_br` (brazilian portuguese)
 
 ## License
 
