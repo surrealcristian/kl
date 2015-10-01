@@ -32,23 +32,6 @@ def _parse_args():
     return args
 
 
-def _only_shifts(modifiers):
-    """Check if modifiers pressed are only shifts"""
-    if not modifiers or len(modifiers) > 2:
-        return False
-    if len(modifiers) == 2:
-        return 'left shift' in modifiers and 'right shift' in modifiers
-    if len(modifiers) == 1:
-        return 'left shift' in modifiers or 'right shift' in modifiers
-
-
-def _only_right_alt(modifiers):
-    """Check if the only modifier pressed is right alt"""
-    if not modifiers or len(modifiers) > 1:
-        return False
-    return 'right alt' in modifiers
-
-
 # ============
 # Transformers
 # ============
@@ -85,6 +68,21 @@ class BaseTransformer:
             'keypad 5', 'keypad 6', 'keypad 7', 'keypad 8', 'keypad 9',
             'keypad .', 'keypad /', 'keypad *', 'keypad -', 'keypad +',
         )
+
+    def _only_shifts(self, modifiers):
+        """Check if modifiers pressed are only shifts"""
+        if not modifiers or len(modifiers) > 2:
+            return False
+        if len(modifiers) == 2:
+            return 'left shift' in modifiers and 'right shift' in modifiers
+        if len(modifiers) == 1:
+            return 'left shift' in modifiers or 'right shift' in modifiers
+
+    def _only_right_alt(self, modifiers):
+        """Check if the only modifier pressed is right alt"""
+        if not modifiers or len(modifiers) > 1:
+            return False
+        return 'right alt' in modifiers
 
 
 class SpanishTransformer(BaseTransformer):
@@ -170,12 +168,12 @@ class SpanishTransformer(BaseTransformer):
                     res = '<' + key + '>'
                 else:
                     res = self._layout['no_mods'][key]
-            elif _only_shifts(modifiers):
+            elif self._only_shifts(modifiers):
                 if key in self._letters:
                     res = key.upper()
                 else:
                     res = self._layout['shift'][key]
-            elif _only_right_alt(modifiers):
+            elif self._only_right_alt(modifiers):
                 res = self._layout['right_alt'][key]
             else:
                 res = None
@@ -269,12 +267,12 @@ class PtBrTransformer(BaseTransformer):
                     res = '<' + key + '>'
                 else:
                     res = self._layout['no_mods'][key]
-            elif _only_shifts(modifiers):
+            elif self._only_shifts(modifiers):
                 if key in self._letters:
                     res = key.upper()
                 else:
                     res = self._layout['shift'][key]
-            elif _only_right_alt(modifiers):
+            elif self._only_right_alt(modifiers):
                 res = self._layout['right_alt'][key]
             else:
                 res = None
