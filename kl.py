@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import ctypes
 from ctypes.util import find_library
 from time import sleep
@@ -505,34 +507,36 @@ class Keymap:
 
 
 class Kl:
-    def __init__(self):
+    def __init__(self, sleep_time=.02, transformer=None,
+                 handler=PrintHandler()):
+        self._sleep_time = sleep_time
+        self._transformer = transformer
+        self._handler = handler
         self._okeymap = Keymap()
         self._last_keymap = None
         self._last_keys = dict(modifiers=[], regular=[])
 
-    def run(self, sleep_time=.02, transformer=None, handler=PrintHandler()):
+    def run(self):
         """Main loop"""
         while True:
-            sleep(sleep_time)
-
             keymap = self._okeymap.get_keymap()
-
             if keymap == self._last_keymap or not keymap:
                 continue
 
             keys = self._okeymap.get_keys(keymap)
-
             if (keys['regular']
                     and keys['regular'] != self._last_keys['regular']):
-                if transformer:
-                    transformed_keys = transformer.transform(keys)
+                if self._transformer:
+                    transformed_keys = self._transformer.transform(keys)
                     if transformed_keys is not None:
-                        handler.handle(transformed_keys)
+                        self._handler.handle(transformed_keys)
                 else:
-                    handler.handle(keys)
+                    self._handler.handle(keys)
 
             self._last_keymap = keymap
             self._last_keys = keys
+
+            sleep(self._sleep_time)
 
 
 if __name__ == '__main__':
@@ -562,5 +566,5 @@ if __name__ == '__main__':
     else:
         handler = PrintHandler()
 
-    kl = Kl()
-    kl.run(sleep_time=sleep_time, transformer=transformer, handler=handler)
+    kl = Kl(sleep_time=sleep_time, transformer=transformer, handler=handler)
+    kl.run()
