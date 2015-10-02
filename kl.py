@@ -27,7 +27,8 @@ def _parse_args():
     arg = parser.add_argument
     arg('-s', '--sleep-time', type=float)
     arg('-t', '--transform', choices=['spanish', 'english_usa', 'pt_br'])
-    arg('-f', '--file', type=argparse.FileType('w'))
+    arg('-f', '--file')
+    arg('-l', '--line-buffering', action='store_true')
     args = parser.parse_args()
     return args
 
@@ -312,7 +313,6 @@ class FileHandler:
 
     def handle(self, value):
         self._stream.write(value + '\n')
-        self._stream.flush()
 
 
 # ============
@@ -554,7 +554,11 @@ if __name__ == '__main__':
         transformer = None
 
     if args.file:
-        handler = FileHandler(args.file)
+        if args.line_buffering:
+            f = open(args.file, mode='w', buffering=1)
+        else:
+            f = open(args.file, mode='w')
+        handler = FileHandler(f)
     else:
         handler = PrintHandler()
 
