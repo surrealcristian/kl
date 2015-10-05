@@ -119,7 +119,7 @@ class SpanishTransformer(BaseTransformer):
                 '7': '/',
                 '8': '(',
                 '9': ')',
-                '`': '~',
+                '`': 'ª',
                 '-': '?',
                 '=': '¿',
                 '<': '>',
