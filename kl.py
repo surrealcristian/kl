@@ -290,14 +290,64 @@ class EnglishUsaTransformer(BaseTransformer):
         super().__init__()
 
         self._layout = {
-            'no_mods': {},
-            'shift': {},
-            'right_alt': {},
+            'misc': ';`-=<[]\'\\,./',
+            'shift': {
+                ';': ':',
+                '0': ')',
+                '1': '!',
+                '2': '@',
+                '3': '#',
+                '4': '$',
+                '5': '%',
+                '6': '^',
+                '7': '&',
+                '8': '*',
+                '9': '(',
+                '`': '~',
+                '-': '_',
+                '=': '+',
+                '<': '>',
+                '[': '{',
+                ']': '}',
+                '\'': '"',
+                '\\': '|',
+                ',': '<',
+                '.': '>',
+                '/': '?',
+                'keypad /': '<keypad />',
+                'keypad *': '<keypad *>',
+                'keypad intro': '<keypad intro>',
+            },
         }
 
-    def transform(keys):
-        """Apply English (USA) layout to the pressed keys"""
-        pass
+    def transform(self, keys):
+        """Apply English USA layout to the pressed keys"""
+        key = keys['regular'][0]
+        modifiers = keys['modifiers']
+
+        try:
+            if not modifiers:
+                if (key in self._letters
+                        or key in self._digits
+                        or key in self._layout['misc']):
+                    res = key
+                elif key in self._command_keys:
+                    res = '<' + key + '>'
+                else:
+                    res = self._layout['no_mods'][key]
+            elif self._only_shifts(modifiers):
+                if key in self._letters:
+                    res = key.upper()
+                else:
+                    res = self._layout['shift'][key]
+            elif self._only_right_alt(modifiers):
+                res = None
+            else:
+                res = None
+        except KeyError:
+            res = None
+
+        return res
 
 
 # ========
@@ -548,12 +598,14 @@ if __name__ == '__main__':
         sleep_time = .02
 
     if args.transform:
-        if args.transform == 'english':
+        if args.transform == 'english_usa':
             transformer = EnglishUsaTransformer()
         elif args.transform == 'spanish':
             transformer = SpanishTransformer()
-        elif transform == 'pt_br':
+        elif args.transform == 'pt_br':
             transformer = PtBrTransformer()
+        else:
+            transformer = None
     else:
         transformer = None
 
