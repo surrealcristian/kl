@@ -12,7 +12,7 @@ Simple keylogger for Linux + X11.
 ## Installation
 
 Install the latest stable release with `pip install kl` or download
-[kl.py](https://github.com/surrealists/kl/blob/master/kl/kl.py) (unstable)
+[kl.py](https://raw.githubusercontent.com/surrealists/kl/master/kl.py) (unstable)
 into your project directory.
 
 
