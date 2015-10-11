@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import sys
+
 
 try:
     from setuptools import setup
@@ -12,28 +13,22 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist bdist_wheel upload')
     sys.exit()
 
-packages = ['kl']
-requires = []
-
 setup(
     name='kl',
-    version='3.0.0',
+    version='4.0.0',
     description='Simple keylogger for Linux + X11',
     author='Cristian Cabrera',
     author_email='surrealcristian@gmail.com',
     url='https://github.com/surrealists/kl',
     keywords='keylogger linux x11',
-    packages=packages,
-    package_dir={'kl': 'kl'},
-    include_package_data=True,
-    install_requires=requires,
     license='MIT',
-    zip_safe=False,
+    py_modules = ['kl'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Environment :: X11 Applications',
         'Intended Audience :: Developers',
+        'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Operating System :: POSIX',
