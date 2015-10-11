@@ -2,67 +2,79 @@
 
 Simple keylogger for Linux + X11.
 
+
 ## Requirements
 
-- python 2 or 3
+- Python 3
 - xlib
+
 
 ## Installation
 
-    pip install kl
-
-## Usage
-
-Using default parameters, the main loop sleep 2 centiseconds between
-iterations, not transforms keys structure, and outputs to STDOUT.
-
-```python
-import kl
-
-kl.run()
-```
-
-Changing the main loop sleep time to 1 centisecond, adding a callback to add a
-timestamp to the structure, and writing it to disk.
-
-```python
-import json
-import kl
-import time
+Install the latest stable release with `pip install kl` or download
+[kl.py](https://github.com/surrealists/kl/blob/master/kl/kl.py) (unstable)
+into your project directory.
 
 
-def add_time(keys):
-    keys['timestamp'] = time.time()
-    return keys
+## CLI usage
 
+    usage: kl.py [-h] [-s SLEEP_TIME] [-t {spanish,english_usa,pt_br}] [-f FILE]
+                 [-l]
 
-def log(keys):
-    with open('/tmp/kl.log', 'a') as f:
-        f.write(json.dumps(keys) + '\n')
+### Examples:
 
+Running kl.py without arguments, will print the pressed keys to stdout:
 
-kl.run(sleep_time=.01, transform=add_time, output=log)
-```
+    $ ./kl.py
+
+    # Type "example":
+
+    {'regular': ['e'], 'modifiers': []}
+    {'regular': ['x'], 'modifiers': []}
+    {'regular': ['a'], 'modifiers': []}
+    {'regular': ['m'], 'modifiers': []}
+    {'regular': ['p'], 'modifiers': []}
+    {'regular': ['l'], 'modifiers': []}
+    {'regular': ['e'], 'modifiers': []}
+
+Running kl.py using the `spanish` transformer, and writing to a file:
+
+    ./kl.py -t spanish -f /tmp/kl.log
+
+    # Type "ñandú":
+
+    $ cat /tmp/kl.log
+    ñ
+    a
+    n
+    d
+    ´
+    u
+
 
 ## Layouts
 
-`kl` comes with functions that apply a certain language layout to the pressed
-keys. That functions can be used as the transform callback.
+`kl` comes with transformers for the next keyboard layouts:
 
-For example:
-
-```python
-import kl
-from kl.layouts import spanish
-
-kl.run(transform=spanish)
-```
-
-Actually the language layouts implemented are:
-
-- `english_usa` (in progress)
+- `english_usa`
 - `spanish`
 - `pt_br` (brazilian portuguese)
+
+
+## Using `kl` as a library
+
+`kl` can also be used as a library. For example:
+
+```python
+from kl import Kl, FileHandler, SpanishTransformer
+
+transformer = SpanishTransformer()
+handler = FileHandler(open('/tmp/kl.log', mode='w', buffering=1))
+
+kl = Kl(sleep_time=0.01, transformer=transformer, handler=handler)
+kl.run()
+```
+
 
 ## License
 
