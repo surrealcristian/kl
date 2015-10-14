@@ -578,6 +578,7 @@ class Kl:
         while True:
             keymap = self._okeymap.get_keymap()
             if keymap == self._last_keymap or not keymap:
+                sleep(self._sleep_time)
                 continue
 
             keys = self._okeymap.get_keys(keymap)
