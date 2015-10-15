@@ -15,7 +15,7 @@ if sys.argv[-1] == 'publish':
 
 setup(
     name='kl',
-    version='4.0.0',
+    version='4.0.1',
     description='Simple keylogger for Linux + X11',
     author='Cristian Cabrera',
     author_email='surrealcristian@gmail.com',
