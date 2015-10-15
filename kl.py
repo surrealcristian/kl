@@ -606,7 +606,7 @@ def _parse_args():
     import argparse
     parser = argparse.ArgumentParser(description='Keylogger for Linux + X11')
     arg = parser.add_argument
-    arg('-s', '--sleep-time', type=float)
+    arg('-s', '--sleep-time', type=float, help='seconds between iterations')
     arg('-t', '--transform', choices=['spanish', 'english_usa', 'pt_br'])
     arg('-f', '--file')
     arg('-l', '--line-buffering', action='store_true')
